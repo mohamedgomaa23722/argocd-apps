@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: host-pv
+  labels:
+    group: example
+spec:
+  capacity:
+    storage: 1Gi
+  volumeMode: Filesystem # storage types we have FileSystem and Block, file system is that we have folder inside our host machine
+  storageClassName: standard
+  accessModes:
+    - ReadWriteOnce #read write by a single node only, and by it's pods
+#    - ReadOnlyMany #reads only from many nodes, hostPath is not supported
+#    - ReadWriteMany # read and write by many nodes, hostPath is not supported
+  hostPath: #create volumn for single node level only
+    path: /data
+    type: DirectoryOrCreate
