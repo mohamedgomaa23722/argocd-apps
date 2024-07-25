@@ -5,7 +5,7 @@ metadata: # meta data about object or application, current situation it is deplo
   labels:
     group: example
 spec: #specification of the object it depends on kind we have declared above
-  replicas: 2 # count of replicas we need to be create, here it will create 3 pods
+  replicas: 5 # count of replicas we need to be create, here it will create 3 pods
   selector: #Deployment object is dynamic created and it knows which pods to managed to this selector matchers so when we create a new pod it will be managed by it
     matchLabels:
       app: second-app
@@ -19,19 +19,19 @@ spec: #specification of the object it depends on kind we have declared above
         - name: second-spring
           image: mohamedgomaa567/kubetest:{{ .Values.container.version }}
           #          imagePullPolicy: Always # each time it will deploy the latest version of the specified image even if it is the same
-          env:
-            - name: STORY_FOLDER
-              valueFrom:
-                configMapKeyRef:
-                  name: data-store-env
-                  key: folder
+      #     env:
+      #       - name: STORY_FOLDER
+      #         valueFrom:
+      #           configMapKeyRef:
+      #             name: data-store-env
+      #             key: folder
 
-          volumeMounts:
-            - mountPath: /opt/app/story # where it will bind data from inside the container (path)
-              name: story-volume
-      volumes:
-        - name: story-volume
-          persistentVolumeClaim:
-            claimName: host-pvc
+      #     volumeMounts:
+      #       - mountPath: /opt/app/story # where it will bind data from inside the container (path)
+      #         name: story-volume
+      # volumes:
+      #   - name: story-volume
+      #     persistentVolumeClaim:
+      #       claimName: host-pvc
 
 
