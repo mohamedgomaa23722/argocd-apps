@@ -19,19 +19,19 @@ spec: #specification of the object it depends on kind we have declared above
         - name: second-spring
           image: mohamedgomaa567/kubetest:{{ .Values.container.version }}
           #          imagePullPolicy: Always # each time it will deploy the latest version of the specified image even if it is the same
-          env:
-            - name: STORY_FOLDER
-              valueFrom:
-                configMapKeyRef:
-                  name: data-store-env
-                  key: folder
+      #     env:
+      #       - name: STORY_FOLDER
+      #         valueFrom:
+      #           configMapKeyRef:
+      #             name: data-store-env
+      #             key: folder
 
-          volumeMounts:
-            - mountPath: /opt/app/story # where it will bind data from inside the container (path)
-              name: story-volume
-      volumes:
-        - name: story-volume
-          persistentVolumeClaim:
-            claimName: host-pvc
+      #     volumeMounts:
+      #       - mountPath: /opt/app/story # where it will bind data from inside the container (path)
+      #         name: story-volume
+      # volumes:
+      #   - name: story-volume
+      #     persistentVolumeClaim:
+      #       claimName: host-pvc
 
 
